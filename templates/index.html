@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Comparison</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="company-name">Dabibun</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="history-section">
+                <h2>Search History</h2>
+                <ul id="search-history">
+                    <!-- Search history items will be displayed here -->
+                </ul>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="input-section">
+                <h2>Input Product Addresses:</h2>
+                <form id="product-form">
+                    <div class="product-input-container">
+                        <div class="product-input-row">
+                            <textarea class="product-input" name="product_addresses" rows="1" placeholder="Enter product address..."></textarea>
+                            <button type="button" class="remove-product">-</button>
+                        </div>
+                        <div class="product-input-row">
+                            <textarea class="product-input" name="product_addresses" rows="1" placeholder="Enter product address..."></textarea>
+                            <button type="button" class="remove-product">-</button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-product">Add Another Product</button>
+                    <h2>User Requirements:</h2>
+                    <textarea id="user-requirements" name="user_requirements" rows="4" placeholder="Enter your requirements..."></textarea>
+                    <button type="submit" id="compare-button">Compare</button>
+                </form>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="output-section">
+                <h2>Comparative Analysis Results:</h2>
+                <div id="comparison-results">
+                    <!-- Comparative analysis results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

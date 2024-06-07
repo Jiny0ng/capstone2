@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>script.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #6aab73;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+script.js</font>
+</center></td></tr></table>
+<pre><span class="s0">document.addEventListener(</span><span class="s1">'DOMContentLoaded'</span><span class="s0">, </span><span class="s2">function</span><span class="s0">() {</span>
+    <span class="s0">const addProductButton = document.getElementById(</span><span class="s1">'add-product'</span><span class="s0">);</span>
+    <span class="s0">const productInputContainer = document.querySelector(</span><span class="s1">'.product-input-container'</span><span class="s0">);</span>
+
+    <span class="s0">addProductButton.addEventListener(</span><span class="s1">'click'</span><span class="s0">, </span><span class="s2">function</span><span class="s0">() {</span>
+        <span class="s0">const productInputRow = document.createElement(</span><span class="s1">'div'</span><span class="s0">);</span>
+        <span class="s0">productInputRow.classList.add(</span><span class="s1">'product-input-row'</span><span class="s0">);</span>
+        <span class="s0">productInputRow.innerHTML = `</span>
+            <span class="s0">&lt;textarea class=</span><span class="s1">&quot;product-input&quot; </span><span class="s0">name=</span><span class="s1">&quot;product_addresses&quot; </span><span class="s0">rows=</span><span class="s1">&quot;1&quot; </span><span class="s0">placeholder=</span><span class="s1">&quot;Enter product address...&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span>
+            <span class="s0">&lt;button type=</span><span class="s1">&quot;button&quot; </span><span class="s0">class=</span><span class="s1">&quot;remove-product&quot;</span><span class="s0">&gt;-&lt;/button&gt;</span>
+        <span class="s0">`;</span>
+        <span class="s0">productInputContainer.appendChild(productInputRow);</span>
+
+        <span class="s3">// Add event listener to the remove button</span>
+        <span class="s0">productInputRow.querySelector(</span><span class="s1">'.remove-product'</span><span class="s0">).addEventListener(</span><span class="s1">'click'</span><span class="s0">, </span><span class="s2">function</span><span class="s0">() {</span>
+            <span class="s0">productInputRow.remove();</span>
+        <span class="s0">});</span>
+    <span class="s0">});</span>
+
+    <span class="s3">// Add event listener to existing remove buttons</span>
+    <span class="s0">document.querySelectorAll(</span><span class="s1">'.remove-product'</span><span class="s0">).forEach(button =&gt; {</span>
+        <span class="s0">button.addEventListener(</span><span class="s1">'click'</span><span class="s0">, </span><span class="s2">function</span><span class="s0">() {</span>
+            <span class="s0">button.parentElement.remove();</span>
+        <span class="s0">});</span>
+    <span class="s0">});</span>
+
+    <span class="s3">// Handle form submission</span>
+    <span class="s0">const form = document.getElementById(</span><span class="s1">'product-form'</span><span class="s0">);</span>
+    <span class="s0">form.addEventListener(</span><span class="s1">'submit'</span><span class="s0">, </span><span class="s2">function</span><span class="s0">(event) {</span>
+        <span class="s0">event.preventDefault();</span>
+        <span class="s0">const formData = </span><span class="s2">new </span><span class="s0">FormData(form);</span>
+        <span class="s0">fetch(</span><span class="s1">'/compare'</span><span class="s0">, {</span>
+            <span class="s0">method: </span><span class="s1">'POST'</span><span class="s0">,</span>
+            <span class="s0">body: formData</span>
+        <span class="s0">})</span>
+        <span class="s0">.then(response =&gt; response.json())</span>
+        <span class="s0">.then(data =&gt; {</span>
+            <span class="s0">const results = document.getElementById(</span><span class="s1">'comparison-results'</span><span class="s0">);</span>
+            <span class="s0">results.innerHTML = `</span>
+                <span class="s0">&lt;h3&gt;Comparison Results:&lt;/h3&gt;</span>
+                <span class="s0">&lt;p&gt;Product Addresses: ${data.product_addresses.join(</span><span class="s1">', '</span><span class="s0">)}&lt;/p&gt;</span>
+                <span class="s0">&lt;p&gt;User Requirements: ${data.user_requirements}&lt;/p&gt;</span>
+                <span class="s0">&lt;p&gt;Result: ${data.result}&lt;/p&gt;</span>
+            <span class="s0">`;</span>
+        <span class="s0">});</span>
+    <span class="s0">});</span>
+<span class="s0">});</span>
+</pre>
+</body>
+</html>
